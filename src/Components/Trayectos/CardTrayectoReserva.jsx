@@ -8,7 +8,7 @@ export default function CardTrayectoReserva({idReserva,trayecto}) {
     event.preventDefault()
     reservasService.eliminarReserva(idReserva).then((response)=>{
         console.log(response)
-        navigate('/user/conig/misReservas')
+        navigate('/user/config/misReservas')
     })
 
   }

@@ -14,7 +14,8 @@ export default function MisReservas() {
         reservasService.obtenerTodasReservas().then((response)=>{
             console.log(response)
         })
-        reservasService.buscarReservasPorUserId(1).then((response)=>{
+        console.log(user)
+        reservasService.buscarReservasPorUserId(user["usuario_id"]).then((response)=>{
             setListReservas(response)
         })
         // trayectosService.obtenerTodosTrayectos().then((response)=>{

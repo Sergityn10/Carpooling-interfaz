@@ -1,10 +1,16 @@
-FROM node:lts-bullseye
+FROM node:23-alpine
 WORKDIR /app
-COPY package*.json . /
-RUN npm ci
+COPY package.json .
+RUN npm install
 COPY . .
-RUN npm run build
-# CMD ["npm","start"]
+CMD ["npm", "run", "dev"]
+
+
+# FROM node
+# WORKDIR /app
+# COPY . .
+
+# CMD ["npm","run", "dev"]
 
 
 # Etapa 2: Servir la aplicación

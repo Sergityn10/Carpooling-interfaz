@@ -51,7 +51,7 @@ export default function Header(){
                                 <NavLink className="formulario" to="/login">Iniciar sesión</NavLink>
                             </>:
                             <>
-                                <NavLink className="alojamiento seleccion" to="/config">¡Hola, {user.name}!</NavLink>
+                                <NavLink className="alojamiento seleccion" to="/user/config">¡Hola, {user.username}!</NavLink>
                                 <NavLink to="/" className="alojamiento seleccion" onClick={handleLogout}>Cerrar sesión</NavLink>
                             </>
                         }

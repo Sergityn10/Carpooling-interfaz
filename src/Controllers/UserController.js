@@ -4,7 +4,7 @@ import { constComunes } from '../Config/constantesComunes';
 const API_URL = constComunes['URL-Usuarios'];
 const path = "usuarios";
 
-const usuariosService = {
+const usersService = {
 
     // Obtener todos los usuarios
     obtenerTodosUsuarios: async () => {
@@ -83,7 +83,16 @@ const usuariosService = {
     obtenerUsuariosPorReservaId: async (reservaId) => {
         const response = await axios.get(`${API_URL}${path}/reserva/${reservaId}`);
         return response.data;
-    }
+    },
+    login: async (usuario) => {
+        const params = new URLSearchParams();
+        params.append('username', usuario.username);
+        params.append('password', usuario.password);
+        const response = await axios.post(`${API_URL}${path}/login`, params, {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+        return response.data;
+        }
 };
 
-export default usuariosService;
+export default usersService;

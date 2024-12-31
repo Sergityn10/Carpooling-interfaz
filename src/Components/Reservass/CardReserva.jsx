@@ -12,7 +12,7 @@ export default function CardReserva({reserva}) {
             setTrayecto(response)
             setLoading(false)
         })
-    })
+    },[reserva.trayectoId])
   return (
     <>
      {loading? <Loading /> : 

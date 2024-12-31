@@ -1,23 +1,29 @@
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import UserContext from "../Context/UserContext"
+import usersService from "../Controllers/UserController"
+
 export default function LogIn() {
   const navigate = useNavigate()
   const [error, setError] = useState(null)
   const {user, setUser,isLoggedIn,setIsLoggedIn} = useContext(UserContext)
-  useEffect(()=>{
-    const response = usersService.getAllUsers()
-    console.log(response)
-  })
+  // useEffect(()=>{
+  //   const response = usersService.obtenerUsuarioPorId()
+  //   console.log(response)
+  // })
   const handleLogIn = (event)=>{
     event.preventDefault();
 
     var userLogIn = {
-      "username": event.target.email.value,
-      "email": event.target.email.value,
+      "username": event.target.username.value,
+      // "email": event.target.email.value,
       "password": event.target.password.value
     }
     console.log(userLogIn)
-    usersService.userLogin(userLogIn).then((response)=>{
+    usersService.login(userLogIn).then((response)=>{
       setUser(response)
-				
+			setError(null)
+      alert("Login exitoso")
 				setIsLoggedIn(true)
       window.localStorage.setItem("User",JSON.stringify(response))
       console.log(response)
@@ -56,14 +62,14 @@ export default function LogIn() {
           </h5>
            {error? error:null}
           <form method="post" onSubmit={handleLogIn}>
-            <label htmlFor="loginEmail"> Usuario </label>
+            <label htmlFor="username"> Usuario </label>
             <input
               type="text"
-              name="email"
+              name="username"
               className="loginBox"
               autoComplete="on"
               size={46}
-              placeholder="Indica tu dirección de email"
+              placeholder="Indica tu username"
               required=""
               style={{ marginBottom: 10 }}
             />
