@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { constComunes } from '../Config/constantesComunes';
 
-const API_URL = constComunes['URL-Usuarios'];
+// const API_URL = constComunes['URL-Usuarios'];
+const API_URL = import.meta.env.VITE_USUARIOS_URL // example URL
 const path = "usuarios";
 
 const usersService = {

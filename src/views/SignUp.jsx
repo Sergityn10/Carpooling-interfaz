@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import usersService from '../Controller/userController'
+import usersService from '../Controllers/UserController'
+
 
 export default function SignUp() {
    const [error, setError] = useState(null)
@@ -8,38 +9,23 @@ export default function SignUp() {
   const handleSignUp = (event)=>{
     let form = event.target
     event.preventDefault();
-    // usersService.addUserForm(form.name.value, form.surname.value, form.username.value,form.email.value,form.password.value).then((response)=>{
-    //   alert("Usuario creado con éxito")
-      
-    //   navigate("/app")
-    // }).catch((error)=>{
-    //   setError(error.message)
-    // })
-    // const user = {
-    //   "username": form.username.value,
-    //   "email": form.email.value,
-    //   "password": form.password.value
-    // }
-    // usersService.addUser(user).then((response)=>{
-    //   alert("Usuario creado con éxito")
-    //   navigate("/app")
-    // })
     if(form.password.value === form.repeatedPassword.value){
       const addUser = {
-      "name": form.name.value,
+      "nombre": form.name.value,
       "surname": form.surname.value,
       "username": form.username.value,
       "email": form.email.value,
       "password": form.password.value
     }
     
-      usersService.addUserForm(form.name.value,form.surname.value,form.username.value,form.email.value,form.password.value ).then((response)=>{
+      usersService.crearUsuario(addUser).then((response)=>{
         alert("Usuario creado con éxito")
-        navigate("/app")
+        
+        navigate("/login")
       })
     }
     else{
-      setError("las contraseñas deben coincidir")
+      setError("Las contraseñas deben coincidir")
     }
     
   }
@@ -81,87 +67,90 @@ export default function SignUp() {
   </header>
   <fieldset className="loginContainer headerMedifli whiteLetters">
     <div>
+      
+      <div className="divLoginMainForm">
       <h5>
         <b>Crea tu cuenta</b>
       </h5>
-      <div>
-        <form  onSubmit={handleSignUp}>
-          <label htmlFor="name" className="loginLables">
-            {" "}
-            Nombre{" "}
-          </label>
-          <span style={{ color: "#FF672C" }}>*</span>
-          <input
-            type="text"
-            className="loginBox"
-            size={46}
-            placeholder="Introduce tu nombre"
-            required=""
-            name="name"
-            id='name'
-          />
-          <label htmlFor="surname" className="loginLables">
-            {" "}
-            Apellido{" "}
-          </label>
-          <input
-            type="text"
-            className="loginBox"
-            size={46}
-            placeholder="Introduce tu apellido"
-            name="surname"
-            id = "surname"
-          />
-          <label htmlFor="username" className="loginLables">
+        <form className='loginForm bordeadoPrincipal'  onSubmit={handleSignUp}>
+          <div className="labelForm">
+            <label htmlFor="name" className="loginLables"> Nombre <span style={{ color: "#FF672C" }}>*</span>
+            </label>
             
-            Username
-          </label>
-          <input
-            type="text"
-            className="loginBox"
-            size={46}
-            placeholder="Introduce tu apellido"
-            name="username"
-            id= "username"
-          />
-          <label htmlFor="email" className="loginLables">
-            {" "}
-            Email{" "}
-          </label>
-          <span style={{ color: "#FF672C" }}>*</span>
-          <input
-            type="text"
-            className="loginBox"
-            size={46}
-            placeholder="Introduce tu e-mail"
-            required=""
-            name="email"
-            id="email"
-          />
-          <label htmlFor="password" className="loginLables">
-            {" "}
-            Contraseña{" "}
-          </label>
-          <span style={{ color: "#FF672C" }}>*</span>
-          <input
-            type="text"
-            id="password"
-            className="loginBox"
-            size={46}
-            placeholder="Introduce tu contraseña"
-            required=""
-            name="password"
-            min={4}
-          />
+            <input
+              type="text"
+              className="loginBox"
+              size={46}
+              placeholder="Introduce tu nombre"
+              required=""
+              name="name"
+              id='name'
+            />
+          </div>
+          <div className="labelForm">
+            <label htmlFor="surname" className="loginLables">Apellido </label>
+            <input
+              type="text"
+              className="loginBox"
+              size={46}
+              placeholder="Introduce tu apellido"
+              name="surname"
+              id = "surname"
+            />
+          </div>
+          <div className="labelForm">
+            <label htmlFor="username" className="loginLables">
+              
+              Username
+            </label>
+            <input
+              type="text"
+              className="loginBox"
+              size={46}
+              placeholder="Introduce tu apellido"
+              name="username"
+              id= "username"
+            />
+          </div>
+          <div className="labelForm">
+            <label htmlFor="email" className="loginLables"> Email <span style={{ color: "#FF672C" }}>*</span>
+            </label>
+            
+            <input
+              type="text"
+              className="loginBox"
+              size={46}
+              placeholder="Introduce tu e-mail"
+              required=""
+              name="email"
+              id="email"
+            />
+          </div>
+          <div className="labelForm">
+          
+            <label htmlFor="password" className="loginLables"> Contraseña <span style={{ color: "#FF672C" }}>*</span>
+            </label>
+            <input
+              type="text"
+              id="password"
+              className="loginBox"
+              size={46}
+              placeholder="Introduce tu contraseña"
+              required=""
+              name="password"
+              min={4}
+            />
+          </div>
           <p className="small-font">
             {error}
           </p>
-          <div>
+          <div className="labelForm">
             <label htmlFor="repeatedPassword" className="loginLables">
               {" "}
               Confirma la contraseña{" "}
+              <span style={{ color: "#FF672C" }}>*</span>
             </label>
-            <span style={{ color: "#FF672C" }}>*</span>
+            
             <input
               type="text"
               id="repeatedPassword"
@@ -173,15 +162,14 @@ export default function SignUp() {
             />
             <p />
           </div>
-          <div>
+          
             <input
               type="submit"
               className="form-control whiteLetters"
               id="loginButton"
-              defaultValue="Crear una cuenta"
               value={"Crear usuario"}
             />
-          </div>
+          
           <p className="small-font" style={{ textAlign: "center" }}>
             {error}
           </p>

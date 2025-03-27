@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { constComunes } from '../Config/constantesComunes';
 
-const API_URL = constComunes['URL-Reservas']; // Base URL para el microservicio de reservas
+// const API_URL = constComunes['URL-Reservas']; // Base URL para el microservicio de reservas
+const API_URL = import.meta.env.VITE_RESERVAS_URL
 const path = "reservas";
 
 const reservasService = {
@@ -13,7 +14,11 @@ const reservasService = {
         return response.data;
     },
     obtenerReservaByUserIdAndTrayectoId: async (userId,trayecto) => {
-        const response = await axios.get(`${API_URL}${path}`, {
+        const params = new URLSearchParams();
+        params.append("userId", userId);
+        params.append("trayectoId", trayecto);
+
+        const response = await axios.get(`${API_URL}${path}`,params, {
             headers: { 'Accept': 'application/x-www-form-urlencoded' }
         });
         return response.data;

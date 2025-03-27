@@ -9,7 +9,7 @@ export default function MisTrayectos() {
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        trayectosService.obtenerTrayectosByUserId(1).then((response)=>{
+        trayectosService.obtenerTrayectosByUserId(user.usuario_id).then((response)=>{
              setListTrayectos(response)
 
             console.log(response)

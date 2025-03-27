@@ -2,13 +2,11 @@
 
 header{
     width: 100%;
+    height: 60px;
+    align-content: center;
     background-color: var(--color-principal);
     margin:0;
     padding: 0;
-}
-
-body{
-	margin:0;
 }
 
 .container-header{

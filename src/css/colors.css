@@ -7,4 +7,5 @@
     --bui_spacing_4x: calc(var(--bui_spacing)*4);
     --bui_spacing_6x: calc(var(--bui_spacing)*6);
     --bui_spacing_8x: calc(var(--bui_spacing)*8);
+    --color-primary-letters:#fff;
 }

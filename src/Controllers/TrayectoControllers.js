@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { constComunes } from '../Config/constantesComunes';
 
-const API_URL = constComunes['URL-Trayectos'];
+// const API_URL = constComunes['URL-Trayectos'];
+const API_URL = import.meta.env.VITE_TRAYECTOS_URL
 const path = "trayectos";
 
 const trayectosService = {
@@ -18,6 +19,20 @@ buscarTrayectos: async (origen, destino, horaSalida) => {
         formData.append("hora_salida", horaSalida);
 
         const response = await axios.post(`${API_URL}${path}/buscar`, formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+                
+            },
+        });
+        return response.data;
+    },
+    buscarTrayectosPorDia: async (origen, destino, dia) => {
+        const formData = new URLSearchParams();
+        formData.append("origen", origen);
+        formData.append("destino", destino);
+        formData.append("fecha", dia);
+
+        const response = await axios.post(`${API_URL}${path}/buscar-por-dia`, formData, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
                 

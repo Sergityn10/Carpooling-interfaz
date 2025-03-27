@@ -18,9 +18,7 @@ export default function MisReservas() {
         reservasService.buscarReservasPorUserId(user["usuario_id"]).then((response)=>{
             setListReservas(response)
         })
-        // trayectosService.obtenerTodosTrayectos().then((response)=>{
-        //     setListTrayectos(response)
-        // })
+        
         setLoading(false)
     }, [])
   return (

@@ -18,7 +18,7 @@ export function Configuracion() {
                 <section className="card-perfil">
                     <h2>Información del perfil</h2>
                     <p>Actualiza tus datos personales.</p>
-                    <NavLink to="editUser">Editar perfil</NavLink>
+                    <NavLink to="/user/config/editUser">Editar perfil</NavLink>
                 </section>
                 
                 {/* <section className="card-perfil">
