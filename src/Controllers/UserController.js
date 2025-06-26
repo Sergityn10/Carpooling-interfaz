@@ -85,7 +85,7 @@ const usersService = {
         const response = await axios.get(`${API_URL}${path}/reserva/${reservaId}`);
         return response.data;
     },
-    login: async (usuario) => {
+    loginAntiguo: async (usuario) => {
         const params = new URLSearchParams();
         params.append('username', usuario.username);
         params.append('password', usuario.password);
@@ -93,7 +93,16 @@ const usersService = {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
         return response.data;
-        }
+        },
+    login: async (usuario) =>{
+        const username = usuario.username 
+        const password = usuario.password
+
+        const response = await axios.post(`${API_URL}resource-server/api/auth/login`, usuario, {
+            headers: { 'Content-Type': 'application/json' }
+            });
+        return response
+    }
 };
 
 export default usersService;
