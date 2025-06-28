@@ -1,6 +1,6 @@
 import '../css/header.css';
 
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import UserContext from '../Context/UserContext';
