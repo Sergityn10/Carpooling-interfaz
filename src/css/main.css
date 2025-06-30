@@ -12,9 +12,21 @@
   }
 }
 
+.main-search-form{
+  height: 90vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px 5px #e4e4e7;
+  padding: 0 10px;
+
+
+}
+html{
+  background-color: #f5fbff;
+}
+
 @media screen and (max-width: 800px) {
   .explicacion-tags-main {
-    flex-direction: column;
+        /* flex-direction: column; */
   }
     
 }

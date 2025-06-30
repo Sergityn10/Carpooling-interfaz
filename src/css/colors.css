@@ -1,6 +1,6 @@
 :root{
-    --color-principal:#003b95;
-    --color-primary-button-bg-letters:#006ce4;
+    --color-principal:#19e266ab;
+    --color-primary-button-bg-letters:#35e400;
     --color-hover-button-bg-trans:#076cfb2f;
     --bui_spacing: 4px;
     --bui_spacing_2x: calc(var(--bui_spacing)*2);
