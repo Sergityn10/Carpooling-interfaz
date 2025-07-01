@@ -18,10 +18,11 @@ export default function SignUp() {
       "password": form.password.value
     }
     
-      usersService.crearUsuario(addUser).then((response)=>{
+      usersService.register({"username": addUser.username, "password":addUser.password}).then((response)=>{
         alert("Usuario creado con éxito")
-        
         navigate("/login")
+      }).catch((error) =>{
+        setError("Error al crear el usuario. Por favor, inténtalo de nuevo.")
       })
     }
     else{

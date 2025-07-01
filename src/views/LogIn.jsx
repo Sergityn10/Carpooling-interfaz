@@ -1,42 +1,36 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import UserContext from "../Context/UserContext"
-import usersService from "../Controllers/UserController"
+import UseUser from "../Hooks/UseUser"
+import loadingGif from "../images/loading.gif"
 
 export default function LogIn() {
   const navigate = useNavigate()
-  const [error, setError] = useState(null)
-  const {user, setUser,isLoggedIn,setIsLoggedIn} = useContext(UserContext)
-  // useEffect(()=>{
-  //   const response = usersService.obtenerUsuarioPorId()
-  //   console.log(response)
-  // })
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const {isLoggedIn, login,userError, loading} = UseUser()
+
   const handleLogIn = (event)=>{
     event.preventDefault();
 
-    var userLogIn = {
-      "username": event.target.username.value,
-      // "email": event.target.email.value,
-      "password": event.target.password.value
-    }
-    console.log(userLogIn)
-    usersService.login(userLogIn).then((response)=>{
-      setUser(response)
-			setError(null)
-      alert("Login exitoso")
-				setIsLoggedIn(true)
-      window.localStorage.setItem("User",JSON.stringify(response))
-      console.log(response)
-      navigate("/app")
-    }).catch((error)=>{
-      if(error.status === 404){
-        alert("Invalid username or password");
-        setError("Invalid username or password")
-      }
-    })
+    login({username,password})
   }
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/app")
+    }
+  }, [isLoggedIn, navigate])
+
+  if(loading){
+    return (
+      <div className="loading">
+        <img src={loadingGif} alt="Loading..." />
+      </div>
+    )
+  }
+
   return (
     <>
+   
     <main className="child-div">
       <fieldset className="loginContainer headerMedifli whiteLetters">
         <div className="divLoginMainForm">
@@ -51,7 +45,7 @@ export default function LogIn() {
           <h2>
             <b>Inicia sesión o crea una cuenta</b>
           </h2>
-           {error? error:null}
+           {userError? <p className="error">Se ha producido un erro al realizar el inicio de sesion</p>:null}
           <form method="post" className="loginForm bordeadoPrincipal" onSubmit={handleLogIn}>
             
             <div className="labelForm">
@@ -65,6 +59,8 @@ export default function LogIn() {
                 placeholder="Indica tu username"
                 required=""
                 style={{ marginBottom: 10 }}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             
@@ -79,6 +75,8 @@ export default function LogIn() {
                 size={46}
                 placeholder="Indica tu contraseña"
                 required=""
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             
@@ -164,6 +162,7 @@ export default function LogIn() {
         </div>
       </fieldset>
     </main>
+        
 </>
   )
 }

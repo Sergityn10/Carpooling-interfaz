@@ -3,7 +3,7 @@ import { constComunes } from '../Config/constantesComunes';
 
 // const API_URL = constComunes['URL-Usuarios'];
 const API_URL = import.meta.env.VITE_USUARIOS_URL // example URL
-const path = "usuarios";
+const path = "api/auth";
 
 const usersService = {
 
@@ -85,15 +85,37 @@ const usersService = {
         const response = await axios.get(`${API_URL}${path}/reserva/${reservaId}`);
         return response.data;
     },
-    login: async (usuario) => {
+    loginAntiguo: async (usuario) => {
         const params = new URLSearchParams();
         params.append('username', usuario.username);
         params.append('password', usuario.password);
         const response = await axios.post(`${API_URL}${path}/login`, params, {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
+        
         return response.data;
-        }
+        },
+login : async ({ username, password }) => {
+  const response = await axios.post(`${API_URL}${path}/login`, { username, password });
+  return response.data;
+},
+
+ register : async ({ username, password }) => {
+  const response = await axios.post(`${API_URL}${path}/register`, { username, password });
+  return response.data;
+},
+validateToken : async (token) => {
+//   const token = localStorage.getItem('access_token');
+  const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  return axios.get(`${API_URL}${path}/validate`, { headers });
+
+}
+,
+getAuthHeader : () => {
+  const token = localStorage.getItem('access_token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
 };
 
 export default usersService;
