@@ -3,6 +3,8 @@ import { useLocation } from 'react-router-dom'
 import trayectosService from '../Controllers/TrayectoControllers'
 import ListCardTrayectoSearch from '../Components/Trayectos/ListCardTrayectoSearch'
 import FormTrayectoMain from '../Components/Trayectos/FormTrayectoMain'
+import FormSearchTrayects from '../Components/Formularios/FormSearchTrayects'
+import Loading from '../Components/Loading'
 
 export default function Search() {
     const [trayectos,setTrayectos] = useState([])
@@ -35,13 +37,13 @@ export default function Search() {
         <h1>BUSCADOR</h1>
 
         <section>
-          <FormTrayectoMain/>
+          <FormSearchTrayects/>
         </section>
 
         <section className="list-result-trayectos">
           <h2>Resultados de la busqueda</h2>
 
-        {loading? <p>Cargando...</p> : 
+        {loading? <Loading/> : 
         
         <ListCardTrayectoSearch listTrayectos={trayectos}/>
         }

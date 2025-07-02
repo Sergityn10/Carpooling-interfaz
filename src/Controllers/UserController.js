@@ -114,8 +114,17 @@ validateToken : async (token) => {
 getAuthHeader : () => {
   const token = localStorage.getItem('access_token');
   return token ? { Authorization: `Bearer ${token}` } : {};
-}
+},
 
+    login2: async (usuario) =>{
+        const username = usuario.username 
+        const password = usuario.password
+
+        const response = await axios.post(`${API_URL}resource-server/api/auth/login`, usuario, {
+            headers: { 'Content-Type': 'application/json' }
+            });
+        return response
+    }
 };
 
 export default usersService;

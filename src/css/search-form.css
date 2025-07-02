@@ -1,29 +1,19 @@
 @import "colors.css";
 form.trayecto-form {
-    display: flex;
-    flex-direction: column;
-    flex-basis: auto;
-    flex-grow:0;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-areas: 
+    "input1 input2"
+    "input3 input3" 
+    "submit submit"
+    ;
     font-weight: 400;
-    flex-shrink: 1;
-    width: auto;
-
-    font-size-adjust: 100%;
     margin: 0px auto;
-
     border-radius: 0.25rem;
     
-    
 
-* {
-    flex:1;
-    height: 50%;
-
-
-}
 
     button[type="submit"] {
+        grid-area: submit;
         background-color: var(--color-primary-button-bg-letters);
         color: var(--color-primary-letters);
         border: none;
@@ -31,31 +21,50 @@ form.trayecto-form {
         cursor: pointer;
         padding: 0.5rem;
         margin: 0.5rem 0;
+        font-size:xx-large;
+        font-weight: 600;
     }
+    #container-origen{
+        grid-area: input1;
+    }
+    #container-destino{
+        grid-area: input2;
+    }
+    #container-fecha{
+        grid-area: input3;
+    }
+    
 
     input[type="text"], input[type="date"] {
-
     border: 1px solid var(--color-primary-letters);
     border-radius: 0.25rem;
-    background-color: gray;
-    color: var(--color-primary-letters);
     cursor: pointer;
+    font-size: large;
     
     
 }
 
-    input[type="text"]::placeholder {
-        color: var(--color-primary-letters);
-    }
 
     input[type="date"] {
         padding: 0.5rem;
-        margin: 0.5rem 0;
+        font-size: large;
+        font-family: "Arial", sans-serif;
     }
 
     input[type="text"]:focus, input[type="date"]:focus {
+        
         background-color: var(--color-principal);
     }
     
+    
+}
+
+.section-input-search-form{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    margin: 4px 4px;
+    height: 100px;
+
 }
 
